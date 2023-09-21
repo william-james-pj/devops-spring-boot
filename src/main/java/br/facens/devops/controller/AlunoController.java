@@ -51,7 +51,7 @@ public class AlunoController {
 		Curso curso = cursoService.findById(cursoId);
 		
 		if (curso == null) {
-			throw new AlunoNotFoundException("id do curso não encontrado - " + alunoId);
+			throw new AlunoNotFoundException("id do curso não encontrado - " + cursoId);
 		}
 		
 		if (aluno == null) {
@@ -62,5 +62,24 @@ public class AlunoController {
 		alunoService.update(aluno);
 		
 		return "Aluno inscrito com sucesso no curso.";
+	}
+	
+	@PostMapping("/aluno/finalizar")
+	public String finalizarCurso(@RequestParam int alunoId, @RequestParam int cursoId, @RequestParam float nota) {
+		Aluno aluno = alunoService.findById(alunoId);
+		Curso curso = cursoService.findById(cursoId);
+		
+		if (curso == null) {
+			throw new AlunoNotFoundException("id do curso não encontrado - " + cursoId);
+		}
+		
+		if (aluno == null) {
+			throw new AlunoNotFoundException("id do aluno não encontrado - " + alunoId);
+		}
+		
+		aluno.finalizarCurso(nota, curso);
+		alunoService.update(aluno);
+		
+		return "Aluno finalizou com sucesso o curso.";
 	}
 }

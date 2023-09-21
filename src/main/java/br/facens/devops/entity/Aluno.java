@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.facens.devops.exception.AlunoCourseLimitExceededException;
-import br.facens.devops.exception.AlunoNotFoundException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -92,5 +91,21 @@ public class Aluno {
 		matricula.setAluno(this);
 		matricula.setCurso(curso);
 		this.qtdCursosDisponivel -= 1;
+	}
+	
+	public void finalizarCurso(double nota, Curso curso) {	
+		for (Matricula matricula : matriculas) {
+			if(matricula.getCurso().equals(curso)) {
+				matricula.setNota(nota);
+				if(nota >= 7) {
+					matricula.setStatus(MatriculaStatus.FINALIZADO);
+					this.qtdCursosDisponivel += 3;
+				} else {
+					matricula.setStatus(MatriculaStatus.REPROVADO);
+					matricula.setPodeFazerSub(true);
+					this.qtdCursosDisponivel += 1;
+				}
+			}
+		}
 	}
 }
