@@ -1,5 +1,5 @@
--- CREATE DATABASE IF NOT EXISTS `devops_db` CHARACTER SET utf8 COLLATE utf8_general_ci;
--- use `devops_db`;
+CREATE DATABASE IF NOT EXISTS `devops_db` CHARACTER SET utf8 COLLATE utf8_general_ci;
+use `devops_db`;
 
 DROP TABLE IF EXISTS `matricula`;
 DROP TABLE IF EXISTS `curso`;

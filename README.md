@@ -14,7 +14,11 @@ Certifique-se de que você tenha as seguintes ferramentas instaladas em sua máq
 
 1. Crie um banco de dados no MySQL. Você pode usar o MySQL Workbench ou o cliente MySQL de sua escolha.
 
-2. Abra o arquivo src/main/resources/application.properties e configure as propriedades do banco de dados de acordo com suas credenciais:
+2. Abra o arquivo `create-tables.sql` que está na raiz do projeto no seu cliente MySQL.s
+
+3. Após a execução bem-sucedida do arquivo SQL, as tabelas e outros objetos definidos no arquivo serão criados no banco de dados MySQL especificado
+
+4. Abra o arquivo src/main/resources/application.properties e configure as propriedades do banco de dados de acordo com suas credenciais:
 
    ```
    spring.datasource.url=jdbc:mysql://localhost:3306/nome_do_seu_banco
@@ -23,10 +27,6 @@ Certifique-se de que você tenha as seguintes ferramentas instaladas em sua máq
    ```
 
    Substitua nome_do_seu_banco, seu_usuario e sua_senha pelos valores corretos.
-
-3. Agora, é importante notar que o Spring Boot está configurado para criar automaticamente as tabelas do banco de dados na inicialização do aplicativo, utilizando um arquivo SQL chamado create-tables.sql. Certifique-se de que este arquivo está localizado na pasta src/main/resources.
-
-   Observação Crucial: É fundamental manter este arquivo SQL atualizado, incluindo quaisquer alterações na estrutura do banco de dados, pois ele será executado toda vez que o aplicativo for iniciado.
 
 ## Executando o Projeto
 

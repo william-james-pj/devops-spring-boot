@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.facens.devops.dto.AlunoRequestDTO;
 import br.facens.devops.entity.Aluno;
 import br.facens.devops.entity.Curso;
 import br.facens.devops.exception.AlunoNotFoundException;
@@ -81,5 +83,13 @@ public class AlunoController {
 		alunoService.update(aluno);
 		
 		return "Aluno finalizou com sucesso o curso.";
+	}
+	
+	@PostMapping("/aluno")
+	public Aluno add(@RequestBody AlunoRequestDTO alunoDTO) {
+		Aluno aluno = new Aluno(alunoDTO);
+		aluno.setRa(0);
+		Aluno alunoDB = alunoService.save(aluno);
+		return alunoDB;
 	}
 }

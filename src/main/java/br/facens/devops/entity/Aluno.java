@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.facens.devops.dto.AlunoRequestDTO;
 import br.facens.devops.exception.AlunoCourseLimitExceededException;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -42,16 +43,20 @@ public class Aluno {
 		this.qtdCursosDisponivel = 1;
 	}
 	
-	public Aluno(String nome) {
+	public Aluno(AlunoRequestDTO alunoDTO) {
 		super();
-		this.nome = nome;
+		this.nome = alunoDTO.nome();
 		this.qtdCursosDisponivel = 1;
 	}
 
 	public int getRA() {
 		return ra;
 	}
-	
+
+	public void setRa(int ra) {
+		this.ra = ra;
+	}
+
 	public String getNome() {
 		return nome;
 	}

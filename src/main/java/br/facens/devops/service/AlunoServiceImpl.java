@@ -34,6 +34,11 @@ public class AlunoServiceImpl implements AlunoService {
 		
 		return aluno.get();
 	}
+	
+	@Override
+	public Aluno save(Aluno aluno) {
+		return repository.save(aluno);
+	}
 
 	@Override
 	public void update(Aluno aluno) {
