@@ -14,9 +14,9 @@ Certifique-se de que você tenha as seguintes ferramentas instaladas em sua máq
 
 1. Crie um banco de dados no MySQL. Você pode usar o MySQL Workbench ou o cliente MySQL de sua escolha.
 
-2. Abra o arquivo `create-tables.sql` que está na raiz do projeto no seu cliente MySQL.s
+2. Abra o arquivo `create-tables.sql` que está na raiz do projeto no seu cliente MySQL.
 
-3. Após a execução bem-sucedida do arquivo SQL, as tabelas e outros objetos definidos no arquivo serão criados no banco de dados MySQL especificado
+3. Após a execução bem-sucedida do arquivo SQL, as tabelas e outros objetos definidos no arquivo serão criados no banco de dados MySQL especificado.
 
 4. Abra o arquivo src/main/resources/application.properties e configure as propriedades do banco de dados de acordo com suas credenciais:
 
