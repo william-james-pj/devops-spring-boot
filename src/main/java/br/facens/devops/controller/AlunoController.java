@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.facens.devops.dto.AlunoRequestDTO;
+import br.facens.devops.dto.AlunoResponseDTO;
 import br.facens.devops.entity.Aluno;
 import br.facens.devops.entity.Curso;
 import br.facens.devops.exception.AlunoNotFoundException;
@@ -31,20 +32,21 @@ public class AlunoController {
 	}
 
 	@GetMapping("/alunos")
-	public List<Aluno> get() {
-		return alunoService.findAll();
+	public List<AlunoResponseDTO> get() {
+		List<Aluno> alunos = alunoService.findAll();
+		return AlunoResponseDTO.convert(alunos);
 	}
 	
 
 	@GetMapping("/aluno/{alunoId}")
-	public Aluno get(@PathVariable int alunoId) {
+	public AlunoResponseDTO get(@PathVariable int alunoId) {
 		Aluno aluno = alunoService.findById(alunoId);
 		
 		if (aluno == null) {
 			throw new AlunoNotFoundException("id do aluno não encontrado - " + alunoId);
 		}
 		
-		return aluno;
+		return new AlunoResponseDTO(aluno);
 	}
 	
 	@PostMapping("/aluno/inscrever")
@@ -86,10 +88,9 @@ public class AlunoController {
 	}
 	
 	@PostMapping("/aluno")
-	public Aluno add(@RequestBody AlunoRequestDTO alunoDTO) {
-		Aluno aluno = new Aluno(alunoDTO);
-		aluno.setRa(0);
+	public AlunoResponseDTO add(@RequestBody AlunoRequestDTO alunoDTO) {
+		Aluno aluno = AlunoRequestDTO.convert(alunoDTO);
 		Aluno alunoDB = alunoService.save(aluno);
-		return alunoDB;
+		return new AlunoResponseDTO(alunoDB);
 	}
 }

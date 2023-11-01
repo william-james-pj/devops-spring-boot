@@ -1,5 +1,7 @@
 package br.facens.devops.entity;
 
+import br.facens.devops.dto.CursoForm;
+import br.facens.devops.dto.CursoRequestDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,18 @@ public class Curso {
 	public Curso(String nome) {
 		super();
 		this.nome = nome;
+	}
+	
+	public Curso(CursoRequestDTO dto) {
+		super();
+		this.id = 0;
+		this.nome = dto.getNome();
+	}
+	
+	public Curso(CursoForm form) {
+		super();
+		this.id = form.getId();
+		this.nome = form.getNome();
 	}
 
 	public int getId() {

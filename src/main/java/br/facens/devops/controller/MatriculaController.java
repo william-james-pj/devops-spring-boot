@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.facens.devops.dto.MatriculaResponseDTO;
 import br.facens.devops.entity.Matricula;
 import br.facens.devops.exception.MatriculaNotFoundException;
 import br.facens.devops.service.MatriculaService;
@@ -23,18 +24,19 @@ public class MatriculaController {
 	}
 
 	@GetMapping("/matriculas")
-	public List<Matricula> get() {
-		return service.findAll();
+	public List<MatriculaResponseDTO> get() {
+		List<Matricula> matriculas = service.findAll();
+		return MatriculaResponseDTO.convert(matriculas);
 	}
 	
 	@GetMapping("/matricula/{matriculaId}")
-	public Matricula get(@PathVariable int matriculaId) {
+	public MatriculaResponseDTO get(@PathVariable int matriculaId) {
 		Matricula matricula = service.findById(matriculaId);
 		
 		if (matricula == null) {
 			throw new MatriculaNotFoundException("id da matricula não encontrado - " + matriculaId);
 		}
 		
-		return matricula;
+		return new MatriculaResponseDTO(matricula);
 	}
 }

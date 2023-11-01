@@ -1,8 +1,8 @@
 package br.facens.devops.dto;
 
-import br.facens.devops.entity.Aluno;
+import br.facens.devops.entity.Curso;
 
-public class AlunoRequestDTO {
+public class CursoRequestDTO {
 	private String nome;
 
 	public String getNome() {
@@ -13,7 +13,7 @@ public class AlunoRequestDTO {
 		this.nome = nome;
 	}
 	
-	public static Aluno convert(AlunoRequestDTO dto) {
-		return new Aluno(dto);
+	public static Curso convert(CursoRequestDTO dto) {
+		return new Curso(dto);
 	}
 }

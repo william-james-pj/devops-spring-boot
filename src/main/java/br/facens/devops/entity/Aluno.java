@@ -45,7 +45,8 @@ public class Aluno {
 	
 	public Aluno(AlunoRequestDTO alunoDTO) {
 		super();
-		this.nome = alunoDTO.nome();
+		this.ra = 0;
+		this.nome = alunoDTO.getNome();
 		this.qtdCursosDisponivel = 1;
 	}
 
