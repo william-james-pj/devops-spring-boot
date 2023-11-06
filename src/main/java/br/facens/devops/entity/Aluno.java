@@ -49,6 +49,21 @@ public class Aluno {
 		this.nome = alunoDTO.getNome();
 		this.qtdCursosDisponivel = 1;
 	}
+	
+	public Aluno(String nome, int qtdCursosDisponivel) {
+		super();
+		this.ra = 0;
+		this.nome = nome;
+		this.qtdCursosDisponivel = qtdCursosDisponivel;
+	}
+	
+	public Aluno(String nome, int qtdCursosDisponivel, List<Matricula> matriculas) {
+		super();
+		this.ra = 0;
+		this.nome = nome;
+		this.qtdCursosDisponivel = qtdCursosDisponivel;
+		this.matriculas = matriculas;
+	}
 
 	public int getRA() {
 		return ra;

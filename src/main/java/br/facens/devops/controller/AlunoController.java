@@ -2,6 +2,7 @@ package br.facens.devops.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,10 @@ import br.facens.devops.service.CursoService;
 @RequestMapping("/api")
 public class AlunoController {
 	
+	@Autowired
 	private AlunoService alunoService;
+	
+	@Autowired
 	private CursoService cursoService;
 	
 	public AlunoController(AlunoService alunoService, CursoService cursoService) {

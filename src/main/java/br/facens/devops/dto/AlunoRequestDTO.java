@@ -4,6 +4,13 @@ import br.facens.devops.entity.Aluno;
 
 public class AlunoRequestDTO {
 	private String nome;
+	
+	public AlunoRequestDTO() {}
+	
+	public AlunoRequestDTO(String nome) {
+		super();
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return nome;
