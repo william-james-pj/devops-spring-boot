@@ -3,6 +3,8 @@ package br.facens.devops.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import br.facens.devops.dto.AlunoResponseDTO;
 import br.facens.devops.entity.Aluno;
 import br.facens.devops.entity.Curso;
 import br.facens.devops.exception.AlunoNotFoundException;
+import br.facens.devops.exception.CursoNotFoundException;
 import br.facens.devops.service.AlunoService;
 import br.facens.devops.service.CursoService;
 
@@ -54,12 +57,12 @@ public class AlunoController {
 	}
 	
 	@PostMapping("/aluno/inscrever")
-	public String inscreverCurso(@RequestParam int alunoId, @RequestParam int cursoId) {
+	public ResponseEntity<Void> inscreverCurso(@RequestParam int alunoId, @RequestParam int cursoId) {
 		Aluno aluno = alunoService.findById(alunoId);
 		Curso curso = cursoService.findById(cursoId);
 		
 		if (curso == null) {
-			throw new AlunoNotFoundException("id do curso não encontrado - " + cursoId);
+			throw new CursoNotFoundException("id do curso não encontrado - " + cursoId);
 		}
 		
 		if (aluno == null) {
@@ -69,16 +72,16 @@ public class AlunoController {
 		aluno.inscreverCurso(curso);
 		alunoService.update(aluno);
 		
-		return "Aluno inscrito com sucesso no curso.";
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
 	@PostMapping("/aluno/finalizar")
-	public String finalizarCurso(@RequestParam int alunoId, @RequestParam int cursoId, @RequestParam float nota) {
+	public ResponseEntity<Void> finalizarCurso(@RequestParam int alunoId, @RequestParam int cursoId, @RequestParam float nota) {
 		Aluno aluno = alunoService.findById(alunoId);
 		Curso curso = cursoService.findById(cursoId);
 		
 		if (curso == null) {
-			throw new AlunoNotFoundException("id do curso não encontrado - " + cursoId);
+			throw new CursoNotFoundException("id do curso não encontrado - " + cursoId);
 		}
 		
 		if (aluno == null) {
@@ -88,13 +91,14 @@ public class AlunoController {
 		aluno.finalizarCurso(nota, curso);
 		alunoService.update(aluno);
 		
-		return "Aluno finalizou com sucesso o curso.";
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
 	@PostMapping("/aluno")
-	public AlunoResponseDTO add(@RequestBody AlunoRequestDTO alunoDTO) {
+	public ResponseEntity<AlunoResponseDTO> add(@RequestBody AlunoRequestDTO alunoDTO) {
 		Aluno aluno = AlunoRequestDTO.convert(alunoDTO);
 		Aluno alunoDB = alunoService.save(aluno);
-		return new AlunoResponseDTO(alunoDB);
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(new AlunoResponseDTO(alunoDB));
 	}
 }

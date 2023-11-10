@@ -6,6 +6,14 @@ public class CursoForm {
 	private int id;
 	private String nome;
 	
+	public CursoForm() {}
+
+	public CursoForm(int id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
 	public int getId() {
 		return id;
 	}

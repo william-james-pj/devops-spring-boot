@@ -4,30 +4,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class AlunoExceptionHandler {
-	@ExceptionHandler
-	public ResponseEntity<ErrorResponse> handleException(AlunoNotFoundException exc) {
-		ErrorResponse error = new ErrorResponse();
-		error.setStatus(HttpStatus.NOT_FOUND.value());
-		error.setMessage(exc.getMessage());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+	
+	@ExceptionHandler(AlunoNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<String> handleException(AlunoNotFoundException exc) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exc.getMessage());
 	}
 	
-	@ExceptionHandler
-	public ResponseEntity<ErrorResponse> handleException(AlunoCourseLimitExceededException exc) {
-		ErrorResponse error = new ErrorResponse();
-		error.setStatus(HttpStatus.BAD_REQUEST.value());
-		error.setMessage(exc.getMessage());
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-	}
-	
-	@ExceptionHandler
-	public ResponseEntity<ErrorResponse> handleException(Exception exc) {
-		ErrorResponse error = new ErrorResponse();
-		error.setStatus(HttpStatus.BAD_REQUEST.value());
-		error.setMessage(exc.getMessage());
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	@ExceptionHandler(AlunoCourseLimitExceededException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ResponseEntity<String> handleException(AlunoCourseLimitExceededException exc) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exc.getMessage());
 	}
 }

@@ -4,6 +4,13 @@ import br.facens.devops.entity.Curso;
 
 public class CursoRequestDTO {
 	private String nome;
+	
+	public CursoRequestDTO() {}
+	
+	public CursoRequestDTO(String nome) {
+		super();
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return nome;

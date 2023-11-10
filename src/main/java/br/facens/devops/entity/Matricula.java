@@ -54,6 +54,16 @@ public class Matricula {
 		this.podeFazerSub = podeFazerSub;
 		this.status = status;
 	}
+	
+	public Matricula(double nota, boolean podeFazerSub, MatriculaStatus status, Curso curso, Aluno aluno) {
+		super();
+		this.id = 0;
+		this.nota = nota;
+		this.podeFazerSub = podeFazerSub;
+		this.status = status;
+		this.curso = curso;
+		this.aluno = aluno;
+	}
 
 	public int getId() {
 		return id;

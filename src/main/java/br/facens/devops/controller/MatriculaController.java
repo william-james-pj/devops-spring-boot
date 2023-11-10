@@ -2,6 +2,7 @@ package br.facens.devops.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import br.facens.devops.service.MatriculaService;
 @RequestMapping("/api")
 public class MatriculaController {
 
+	@Autowired
 	private MatriculaService service;
 	
 	public MatriculaController(MatriculaService matriculaService) {

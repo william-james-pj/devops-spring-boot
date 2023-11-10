@@ -2,6 +2,9 @@ package br.facens.devops.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +25,7 @@ import br.facens.devops.service.CursoService;
 @RequestMapping("/api")
 public class CursoController {
 	
+	@Autowired
 	private CursoService cursoService;
 	
 	public CursoController(CursoService cursoService) {
@@ -47,21 +51,27 @@ public class CursoController {
 	}
 	
 	@PostMapping("/curso")
-	public CursoResponseDTO add(@RequestBody CursoRequestDTO cursoDTO) {
+	public ResponseEntity<CursoResponseDTO> add(@RequestBody CursoRequestDTO cursoDTO) {
 		Curso curso = CursoRequestDTO.convert(cursoDTO);
 		Curso cursoDB = cursoService.save(curso);
-		return new CursoResponseDTO(cursoDB);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new CursoResponseDTO(cursoDB));
 	}
 	
 	@PutMapping("/curso")
 	public CursoResponseDTO update(@RequestBody CursoForm cursoForm) {
+		Curso hasCurso = cursoService.findById(cursoForm.getId());
+		
+		if (hasCurso == null) {
+			throw new CursoNotFoundException("id do curso não encontrado - " + cursoForm.getId());
+		}
+		
 		Curso curso = CursoForm.convert(cursoForm);
 		Curso cursoDB = cursoService.save(curso);
 		return new CursoResponseDTO(cursoDB);
 	}
 	
 	@DeleteMapping("/curso/{cursoId}")
-	public String delete(@PathVariable int cursoId) {
+	public ResponseEntity<Void> delete(@PathVariable int cursoId) {
 		Curso curso = cursoService.findById(cursoId);
 		
 		if (curso == null) {
@@ -70,6 +80,6 @@ public class CursoController {
 		
 		cursoService.delete(cursoId);
 		
-		return "Curso deletado com sucesso!";
+		return ResponseEntity.noContent().build();
 	}
 }
