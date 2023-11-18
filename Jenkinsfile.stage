@@ -25,7 +25,7 @@ pipeline {
     stage('Run tests against the container') {
       steps {
         script {
-          def containerIds = bat(script: 'docker-compose -f docker-compose.stage.yml ps -q', returnStatus: true).trim()
+          def containerIds = bat(returnStatus: true, script: 'docker-compose -f docker-compose.stage.yml ps -q').trim()
           echo "Container IDs: ${containerIds}"
           containerIds = containerIds.split('\r\n')
           echo "Container IDs (list): ${containerIds}"
