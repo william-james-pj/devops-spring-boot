@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage("verify tooling") {
       steps {
-        bat '''
+        sh '''
           docker version
           docker info
           docker compose version 
@@ -13,24 +13,23 @@ pipeline {
     }
     stage('Start container') {
       steps {
-        bat 'docker compose -f docker-compose.prod.yml up -d --no-color --wait'
-        bat 'docker compose -f docker-compose.prod.yml ps'
+        sh 'docker compose -f docker-compose.prod.yml up -d --no-color --wait'
+        sh 'docker compose -f docker-compose.prod.yml ps'
       }
     }
     stage('Wait for container') {
       steps {
-        bat 'waitfor SomethingThatIsNeverHappening /t 15 2>NUL || type nul>nul'
+        sh 'waitfor SomethingThatIsNeverHappening /t 15 2>NUL || type nul>nul'
       }
     }
     stage('Run tests against the container') {
       steps {
         script {
-          def containerIds = bat(returnStdout: true, script: 'docker compose -f docker-compose.prod.yml ps -q').trim().split('\n')
+          def containerIds = sh(returnStdout: true, script: 'docker compose -f docker-compose.stage.yml ps -q').trim().split('\n')
           def desiredContainerId = containerIds[0] 
-          bat "docker exec '${desiredContainerId}' curl http://localhost:8383"
+          sh "docker exec '${desiredContainerId}' curl http://localhost:9595/api/alunos"
         }
       }
     }
   }
-  
 }
