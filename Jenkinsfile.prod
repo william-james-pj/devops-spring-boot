@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Wait for container') {
       steps {
-        sh 'waitfor SomethingThatIsNeverHappening /t 15 2>NUL || type nul>nul'
+        sh 'sleep 15'
       }
     }
     stage('Run tests against the container') {
