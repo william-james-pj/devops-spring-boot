@@ -3,9 +3,16 @@ version: "3"
 services:
   database_stage:
     image: mysql
-    container_name: mysqldb
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "devops_db"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
 
   api_stage:
     image: devops/spring-boot
