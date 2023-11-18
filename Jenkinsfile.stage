@@ -25,9 +25,9 @@ pipeline {
     stage('Run tests against the container') {
       steps {
         script {
-          // def containerIds = sn(returnStdout: true, script: 'docker compose -f docker-compose.stage.yml ps -q').trim().split('\n')
-          // def desiredContainerId = containerIds[0] 
-          bat "docker exec 3e6b5939c2f62685f8c95040540a493a09060c0856b134404f6d27f06e45690c curl http://localhost:9090/api/alunos"
+          def containerIds = sh(returnStdout: true, script: 'docker compose -f docker-compose.stage.yml ps -q').trim().split('\n')
+          def desiredContainerId = containerIds[0] 
+          bat "docker exec '${desiredContainerId}' curl http://localhost:9090/api/alunos"
         }
       }
     }
