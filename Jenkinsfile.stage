@@ -43,13 +43,15 @@ pipeline {
           ]
         ],
         [
-          "type": "divider"
-        ],
-        [
-          "type": "section",
-          "text": [
-            "type": "mrkdwn",
-            "text": "*Farmhouse Thai Cuisine*\n:star::star::star::star: 1528 reviews\n They do have some vegan options, like the roti and curry, plus they have a ton of salad stuff and noodles can be ordered without meat!! They have something for everyone here"
+          "type": "actions",
+          "elements": [
+            "type": "button",
+            "text": [
+              "type": "plain_text",
+						  "text": "Click Me",
+						  "emoji": true
+            ],
+            "value": "click_me_123",
           ]
         ]
       ])
