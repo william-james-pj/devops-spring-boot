@@ -34,22 +34,33 @@ pipeline {
   }
   post {
     success {
-      slackSend(channel: "pipe-homol", color: '#36a64f', message: "Deployment to stage succeeded!", attachments: [
-        [
-          fallback: "Deploy to production",
-          actions: [
-            [
-              type: 'button',
-              text: 'Deploy to production',
-              value: 'button',
-              style: 'primary'
-            ]
+      blocks = [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Deployment to stage succeeded!*"
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "text": "Deploy to production",
+                "emoji": true
+              }
+            }
           ]
-        ]
-      ])
-    }
+        }
+      ]
+      
+      slackSend(channel: "pipe-homol", blocks: blocks)
+		}
     failure {
-      slackSend(channel: "pipe-homol", color: '#ff0000', message: "Deployment to stage failed!")
+      slackSend(channel: "pipe-homol", message: "Deployment to stage failed!")
     }
   }
 }
