@@ -34,7 +34,7 @@ pipeline {
   }
   post {
     success {
-      blocks = [
+      slackSend(channel: "pipe-homol", blocks: [
         {
           "type": "section",
           "text": {
@@ -55,10 +55,8 @@ pipeline {
             }
           ]
         }
-      ]
-      
-      slackSend(channel: "pipe-homol", blocks: blocks)
-		}
+      ])
+    }
     failure {
       slackSend(channel: "pipe-homol", message: "Deployment to stage failed!")
     }
