@@ -19,6 +19,6 @@ services:
     environment:
       DB_HOST: database_stage
     ports:
-      - "8282:8282"
+      - "9090:9090"
 volumes:
   db-volume:
