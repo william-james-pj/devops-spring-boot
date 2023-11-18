@@ -27,7 +27,7 @@ pipeline {
         script {
           // def containerIds = sn(returnStdout: true, script: 'docker compose -f docker-compose.stage.yml ps -q').trim().split('\n')
           // def desiredContainerId = containerIds[0] 
-          bat "docker exec 6a0588da3daaeb00e8abe088e18c845a8f03f1e208ce0b0ad87e7b6e2254ff07 curl http://localhost:9090"
+          bat "docker exec 6a0588da3daaeb00e8abe088e18c845a8f03f1e208ce0b0ad87e7b6e2254ff07 curl http://localhost:9090/api/alunos"
         }
       }
     }
