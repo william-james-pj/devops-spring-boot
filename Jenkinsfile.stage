@@ -34,6 +34,7 @@ pipeline {
   }
   post {
     success {
+      slackSend(channel: "pipe-homol", message: "Deployment to stage succeeded!")
       slackSend(color: '#36a64f', message: "Deployment to stage succeeded!", attachments: [
         [
           fallback: "Deploy to production",
