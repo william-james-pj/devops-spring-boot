@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  database_prod:
+    image: mysql
+    container_name: mysqldb
+    ports:
+      - "8080:8080"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+  api_prod:
+    image: devops/spring-boot
+    environment:
+      DB_HOST: database_prod
+    ports:
+      - "8383:8383"
+volumes:
+  db-volume:
