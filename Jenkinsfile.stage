@@ -34,27 +34,7 @@ pipeline {
   }
   post {
     success {
-      slackSend(channel: "#pipe-homol", blocks: [
-        [
-          "type": "section",
-          "text": [
-            "type": "mrkdwn",
-            "text": "Deployment to stage succeeded!"
-          ]
-        ],
-        [
-          "type": "actions",
-          "elements": [
-            "type": "button",
-            "text": [
-              "type": "plain_text",
-						  "text": "Click Me",
-						  "emoji": true
-            ],
-            "value": "click_me_123",
-          ]
-        ]
-      ])
+      slackSend(channel: "#pipe-homol", message: "Deployment to stage succeeded!")
     }
     failure {
       slackSend(channel: "#pipe-homol", message: "Deployment to stage failed!")
