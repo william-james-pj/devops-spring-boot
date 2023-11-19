@@ -1,5 +1,6 @@
 package br.facens.devops.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -41,7 +42,7 @@ class MatriculaServiceImplTests {
 	}
 	
 	@Test
-	public void testfindById() {
+	public void testfindByIdWhenIdIsValid() {
 		Matricula matriculaMock = new Matricula(8, false, MatriculaStatus.CURSANDO);
 		
 	    when(repositoryMock.findById(1)).thenReturn(Optional.of(matriculaMock));
@@ -52,11 +53,13 @@ class MatriculaServiceImplTests {
 	}
 	
 	@Test
-	public void testfindByInvalidId() {	
-	    when(repositoryMock.findById(1)).thenThrow(new MatriculaNotFoundException("id da matricula não encontrado"));
-	    Exception exception = assertThrows(MatriculaNotFoundException.class, () -> {
-	    	service.findById(1);
-	    });
-	    assertTrue(exception.getMessage().contains("id da matricula não encontrado"));
+	public void testFindByIdWhenIdIsInvalid() {
+		Exception exception = assertThrows(MatriculaNotFoundException.class, () -> {
+			service.findById(1);
+        });
+	    
+		assertThat(exception).isNotNull();
+		assertThat(exception.getClass()).isEqualTo(MatriculaNotFoundException.class);
+      	assertThat(exception.getMessage()).isEqualTo("id da matricula não encontrado - 1");
 	}
 }

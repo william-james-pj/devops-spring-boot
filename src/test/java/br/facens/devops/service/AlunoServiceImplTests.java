@@ -49,7 +49,7 @@ class AlunoServiceImplTests {
 	}
 	
 	@Test
-	public void testfindById() {
+	public void testfindByIdWhenIdIsValid() {
 		Matricula matricula1 = new Matricula(8, false, MatriculaStatus.CURSANDO);
 		List<Matricula> matriculas = new ArrayList<>(Arrays.asList(matricula1));
 		Aluno alunoMock = new Aluno("Joao", 1, matriculas);
@@ -63,12 +63,14 @@ class AlunoServiceImplTests {
 	}
 	
 	@Test
-	public void testfindByInvalidId() {	
-	    when(repositoryMock.findById(1)).thenThrow(new AlunoNotFoundException("id do aluno não encontrado"));
-	    Exception exception = assertThrows(AlunoNotFoundException.class, () -> {
-	    	service.findById(1);
-	    });
-	    assertTrue(exception.getMessage().contains("id do aluno não encontrado"));
+	public void testfindByIdWhenIdIsInvalid() {
+		Exception exception = assertThrows(AlunoNotFoundException.class, () -> {
+			service.findById(1);
+        });
+	    
+		assertThat(exception).isNotNull();
+		assertThat(exception.getClass()).isEqualTo(AlunoNotFoundException.class);
+      	assertThat(exception.getMessage()).isEqualTo("id do aluno não encontrado - 1");
 	}
 	
 	@Test

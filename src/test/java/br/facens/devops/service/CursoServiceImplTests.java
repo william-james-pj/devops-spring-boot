@@ -1,5 +1,6 @@
 package br.facens.devops.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -45,7 +46,7 @@ class CursoServiceImplTests {
 	}
 	
 	@Test
-	public void testCursoFindById() { 
+	public void testCursoFindByIdWhenIdIsValid() { 
 		Curso cursoMock = new Curso("Fisica");
 		
 		when(repositoryMock.findById(1)).thenReturn(Optional.of(cursoMock));
@@ -55,12 +56,14 @@ class CursoServiceImplTests {
 	}
 	
 	@Test
-	public void testCursoFindByInvalidId() {	
-	    when(repositoryMock.findById(1)).thenThrow(new CursoNotFoundException("id do curso não encontrado"));
-	    Exception exception = assertThrows(CursoNotFoundException.class, () -> {
-	    	service.findById(1);
-	    });
-	    assertTrue(exception.getMessage().contains("id do curso não encontrado"));
+	public void testCursoFindByIdWhenIdIsInvalid() {
+		Exception exception = assertThrows(CursoNotFoundException.class, () -> {
+			service.findById(1);
+        });
+	    
+		assertThat(exception).isNotNull();
+		assertThat(exception.getClass()).isEqualTo(CursoNotFoundException.class);
+      	assertThat(exception.getMessage()).isEqualTo("id do curso não encontrado - 1");
 	}
 	
 	@Test
