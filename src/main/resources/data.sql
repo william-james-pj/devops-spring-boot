@@ -1,6 +1,6 @@
 
-INSERT INTO CURSO(nome) VALUES('Introdução à Psicologia 3');
-INSERT INTO CURSO(nome) VALUES('Programação em Python para Iniciantes');
+INSERT INTO CURSO(nome) VALUES('Introducao a Psicologia 3');
+INSERT INTO CURSO(nome) VALUES('Programacao em Python para Iniciantes');
 INSERT INTO CURSO(nome) VALUES('Gestão Financeira Pessoal');
 
 INSERT INTO ALUNO(nome, qtd_cursos_disponivel) VALUES('Maria da Silva', 1);

@@ -31,7 +31,7 @@ class CursoRepositoryTests {
         Assertions.assertThat(cursos.size()).isEqualTo(3);
         Assertions.assertThat(cursos.get(0).getId()).isNotNegative();
         Assertions.assertThat(cursos.get(0).getId()).isGreaterThan(0);
-        Assertions.assertThat(cursos.get(0).getNome()).isEqualTo("Introdução à Psicologia 3");
+        Assertions.assertThat(cursos.get(0).getNome()).isEqualTo("Introducao a Psicologia 3");
     }
     
     @Test
