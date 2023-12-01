@@ -34,7 +34,7 @@ pipeline {
   }
   post {
     always {
-      sh 'docker stop pipe-homol-api_stage-1'
+      sh 'docker stop pipe-homol-api_stage-1 pipe-homol-database_stage-1'
     }
     success {
       slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologacao foi concluida com sucesso! Todos os testes foram bem-sucedidos, indicando que o codigo esta pronto para a proxima fase.")
