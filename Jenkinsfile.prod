@@ -32,4 +32,15 @@ pipeline {
       }
     }
   }
+  post {
+    always {
+      sh 'docker stop pipe-prod-api_prod-1 pipe-prod-database_prod-1'
+    }
+    success {
+      slackSend(channel: "#pipe-prod", message: "E com grande satisfacao que informamos que a pipeline de producao foi executada com sucesso! Todas as etapas foram concluidas sem problemas, e as alteracoes foram implementadas no ambiente de producao.")
+    }
+    failure {
+      slackSend(channel: "#pipe-prod", message: "Infelizmente, a execucao da pipeline de producao encontrou problemas e nao pode ser concluida com sucesso. E crucial resolver essas questões o mais rapido possivel.")
+    }
+  }
 }
