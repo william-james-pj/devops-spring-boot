@@ -34,8 +34,7 @@ pipeline {
   }
   post {
     always {
-      sh 'docker compose down --remove-orphans'
-      sh 'docker compose ps'
+      sh 'docker stop pipe-homol'
     }
     success {
       slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologacao foi concluida com sucesso! Todos os testes foram bem-sucedidos, indicando que o codigo esta pronto para a proxima fase.")
