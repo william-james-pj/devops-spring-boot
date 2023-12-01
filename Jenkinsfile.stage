@@ -34,14 +34,14 @@ pipeline {
   }
   post {
     always {
-      sh 'docker compose down --remove-orphans -v'
+      sh 'docker compose down --remove-orphans'
       sh 'docker compose ps'
     }
     success {
-      slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologação foi concluída com sucesso! Todos os testes foram bem-sucedidos, indicando que o código está pronto para a próxima fase.")
+      slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologacao foi concluida com sucesso! Todos os testes foram bem-sucedidos, indicando que o codigo esta pronto para a proxima fase.")
     }
     failure {
-      slackSend(channel: "#pipe-homol", message: "Lamentamos informar que a pipeline de homologação falhou durante a execução. Foram identificados problemas que precisam ser corrigidos antes de prosseguirmos.")
+      slackSend(channel: "#pipe-homol", message: "Lamentamos informar que a pipeline de homologacao falhou durante a execucao. Foram identificados problemas que precisam ser corrigidos antes de prosseguirmos.")
     }
   }
 }
