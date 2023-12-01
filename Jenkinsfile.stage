@@ -37,7 +37,7 @@ pipeline {
       sh 'docker stop pipe-homol-api_stage-1 pipe-homol-database_stage-1'
     }
     success {
-      slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologacao foi concluida com sucesso! Todos os testes foram bem-sucedidos, indicando que o codigo esta pronto para a proxima fase. Para iniciar a pipeline de produção agora, clique no seguinte link: http://localhost:8180/job/pipe-prod/build?token=pipeprod ")
+      slackSend(channel: "#pipe-homol", message: "Temos o prazer de informar que a pipeline de homologacao foi concluida com sucesso! Todos os testes foram bem-sucedidos, indicando que o codigo esta pronto para a proxima fase. Para iniciar a pipeline de producao agora, clique no seguinte link: http://localhost:8180/job/pipe-prod/build?token=pipeprod ")
     }
     failure {
       slackSend(channel: "#pipe-homol", message: "Lamentamos informar que a pipeline de homologacao falhou durante a execucao. Foram identificados problemas que precisam ser corrigidos antes de prosseguirmos.")
